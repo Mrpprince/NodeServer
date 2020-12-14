@@ -129,7 +129,4 @@ client.connect(err => {
     })
 });
 
-
-app.listen(port, () => {
-    console.log("Go gone goneee");
-})
+app.listen(process.env.PORT || port)
