@@ -3,6 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+require('dotenv').config()
 const port = 8080;
 
 const app = express();
@@ -11,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(fileUpload());
 
-const uri = "mongodb+srv://ouragency:myagency@cluster0.ynnkd.mongodb.net/my-agency?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ynnkd.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const ProvideService = client.db("my-agency").collection("agency");
